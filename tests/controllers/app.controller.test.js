@@ -32,6 +32,31 @@ describe("AppController", function () {
             // assert that the stub is logged in at least once
             expect(isLoggedInStub.calledOnce).to.be.true;
         });
+
+        it("should send something else when user is not logged in",function(){
+            let user = {
+                isLoggedIn:function(){}
+            }
+            //stub isLoggedIn function and make it return false always
+            const isLoggedInStub = sinon.stub(user,"isLoggedIn").returns(false);
+            //pass user into req object
+            let req = {
+                user:user
+            }
+            //Have res have a send key with funciton value coz we res.send() in our func
+            let res = {
+                // replace empty function with a spy
+                send:sinon.spy()
+            }
+            indexPage.getIndexPage(req,res);
+            // let's see what we get on res.send
+            // console.log(res.send);
+            // `res.send` called once
+            expect(res.send.calledOnce).to.be.true;
+            expect(res.send.firstCall.args[0]).to.equal("Ooops. You need to log in to access this page");
+            // assert that the stub is logged in at least once
+            expect(isLoggedInStub.calledOnce).to.be.true;
+        });
     });
 
 /*     describe("User", function () {
