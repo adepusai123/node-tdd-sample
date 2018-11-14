@@ -18,6 +18,6 @@ describe("getIndexPage",function(){
         // `res.send` called once
         expect(res.send.calledOnce).to.be.true;
         // expect to get argument `bla` on first call
-        expect(res.send.firstCall.args[0]).to.equal("bla");
+        expect(res.send.firstCall.args[0]).to.equal("hey");
     });
 });
