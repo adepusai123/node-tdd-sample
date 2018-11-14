@@ -11,12 +11,16 @@ function someMadeUpAsyncFunc(boolValue, cb){
 
 // Added the `only` tag to have only this set of tests to run
 describe.only("AsyncTest",function(){
-    it("should return `You get a sweet :)` if `true` is passed in",function(){
+    it("should return `You get a sweet :)` if `true` is passed in",function(done){
         someMadeUpAsyncFunc(true,function(sweetcheck){
             expect(sweetcheck).to.equal("You get a sweet :)");
+            done();
         });
     });
-    it("should return `You get nothing!!` if `false` is passed in",function(){
-        expect(someMadeUpAsyncFunc(false)).to.eventually.equal("You get nothing!!");
+    it("should return `You get nothing!!` if `false` is passed in",function(done){
+        someMadeUpAsyncFunc(false,function(sweetcheck){
+            expect(sweetcheck).to.equal("You get nothing!!");
+            done();
+        });
     });
 });
